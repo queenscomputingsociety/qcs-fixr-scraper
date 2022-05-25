@@ -1,4 +1,5 @@
 const schedule = require("node-schedule");
+const creds = require("../creds");
 const { main } = require("./app");
 
 process.on("SIGINT", function () {
@@ -6,7 +7,7 @@ process.on("SIGINT", function () {
 });
 
 //Run at minute 0 of every hour
-schedule.scheduleJob("0 */1 * * *", () => {
+schedule.scheduleJob(`0 */${creds.runEvery} * * *`, () => {
   console.log("Starting run at " + new Date());
   main();
 });
