@@ -1,17 +1,12 @@
-const showBanner = require("node-banner");
-const creds = require("../creds");
-const { processData } = require("./processData");
-const { removeAllFilesInDirectory } = require("./removeAllFiles");
-const { scrape } = require("./scrape");
+const schedule = require("node-schedule");
+const { main } = require("./app");
 
-const main = async () => {
-  await showBanner(
-    "FIXR  SCRAPER",
-    "Queen's Computing Society, Queen's University Belfast\n 2022 - James McFarland."
-  );
-  await removeAllFilesInDirectory(creds.downloadDir);
-  await scrape(true);
-  await processData();
-};
+process.on("SIGINT", function () {
+  schedule.gracefulShutdown().then(() => process.exit(0));
+});
 
-main();
+//Run at minute 0 of every hour
+schedule.scheduleJob("0 */1 * * *", () => {
+  console.log("Starting run at " + new Date());
+  main();
+});

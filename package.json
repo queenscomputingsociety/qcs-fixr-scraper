@@ -8,6 +8,7 @@
     "csv-parse": "^5.0.4",
     "google-spreadsheet": "^3.3.0",
     "node-banner": "^1.4.0",
+    "node-schedule": "^2.1.0",
     "puppeteer": "^13.7.0"
   }
 }
