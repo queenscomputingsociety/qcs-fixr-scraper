@@ -11,3 +11,6 @@ schedule.scheduleJob(`0 */${creds.runEvery} * * *`, () => {
   console.log("Starting run at " + new Date());
   main();
 });
+
+//Run it once on startup
+main();
