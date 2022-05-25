@@ -11,7 +11,7 @@ You’ll need Node.JS installed, version 16.5.0 or higher. I’d recommend using
 Clone the repo
 
 ```bash
-git clone https://github.com/jamesmcfarland/qcs-fixr-scraper
+git clone https://github.com/qcsqub/qcs-fixr-scraper
 ```
 
 Install dependencies
