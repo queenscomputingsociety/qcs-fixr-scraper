@@ -11,7 +11,7 @@ You’ll need Node.JS installed, version 16.5.0 or higher. I’d recommend using
 Clone the repo
 
 ```bash
-git clone https://github.com/qcsqub/qcs-fixr-scraper
+git clone https://github.com/jamesmcfarland/qcs-fixr-scraper
 ```
 
 Install dependencies
@@ -66,6 +66,11 @@ Next,
         - The ID of the Google Sheet you want to target. Right now, this needs to be a publicly accessible sheet.
         - This can be found in the URL of the sheet:
             - `https://docs.google.com/spreadsheets/d/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+    - `runEvery`
+        - This sets the interval that the script runs, in hours. e.g.
+            - For every hour: `1`
+            - For every day: `24`
+            - For every week: `168`
     
     ### Running
     
@@ -77,7 +82,35 @@ Next,
     
     All being well, you’ll see a bunch of messages come up and the system run!
     
-    We’re still working on the best way to run this on a schedule, and this will be updated once we have finalised those plans
+    The script configures itself to run every `runEvery` hours, this defaults to 1. This is done using `node-schedule` for easy use with a daemon tool like PM2. 
+    
+    ### PM2 Setup
+    
+    Running using node is great, but it provides no auto-restarting, file watching or anything else. For production, I’d recommend PM2. It allows you to daemonize applications and monitor logs. It can also support load balancing, which depending on your application, could be important
+    
+    Install PM2 with the below command
+    
+    ```bash
+    npm install -g pm2
+    ```
+    
+    Run the app using PM2 with the below command (this enables filesystem watching, starts 4 load-balanced instances and gives it a friendly name
+    
+    ```bash
+    pm2 start src --name qcs-fixr -i 4 --watch
+    ```
+    
+    Enable PM2 at startup
+    
+    ```bash
+    pm2 startup
+    ```
+    
+    And finally, save the current state of processes, as this will be used to start services when the server reboots
+    
+    ```bash
+    pm2 save
+    ```
     
     ## Fixing issues
     
