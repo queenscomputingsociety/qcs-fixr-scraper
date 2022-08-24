@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const creds = require("../creds");
+const config = require("../config");
 const path = require("path");
 const fse = require("fs-extra")
 
@@ -14,9 +14,9 @@ const scrape = async (headlessMode) => {
   await page.waitForSelector("input[type='email']")
   console.log("[SCRP] Logging in");
   await page.click("input[type='email']");
-  await page.keyboard.type(creds.email);
+  await page.keyboard.type(config.email);
   await page.click("input[type='password']");
-  await page.keyboard.type(creds.password);
+  await page.keyboard.type(config.password);
   await page.click("button[type='submit']");
 
   await page.waitForNetworkIdle();
@@ -24,13 +24,13 @@ const scrape = async (headlessMode) => {
 
   page.on('response', async (response) => {
 
-    let filePath = path.resolve(`./${creds.downloadDir}/output.json`);
+    let filePath = path.resolve(`./${config.downloadDir}/output.json`);
     await fse.outputFile(filePath, await response.buffer());
     await browser.close();
   });
   console.log("[SCRP] Downloading file");
   await page.goto(
-    `https://api.fixr.co/api/v2/organiser/accounts/${creds.accountId}/events/${creds.eventId}/attendees?limit=${creds.maxAttendees}`
+    `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/attendees?limit=${config.maxAttendees}`
   );
   console.log("[SCRP] Done");
   return

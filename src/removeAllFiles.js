@@ -1,13 +1,13 @@
 
 const fs = require("fs");
 const path = require("path");
-const creds = require("../creds");
+const config = require("../config");
 require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 const removeAllFilesInDirectory = async (dir) => {
-  console.log(`[RAFD] Removing all files in directory "${creds.downloadDir}"`);
+  console.log(`[RAFD] Removing all files in directory "${config.downloadDir}"`);
 
-  fs.mkdir(creds.downloadDir, (err) => {
+  fs.mkdir(config.downloadDir, (err) => {
     return;
   });
   fs.readdir(dir, (err, files) => {

@@ -48,7 +48,7 @@ Next,
             - Click update, then save and continue
     - All done! That’s GCP configured.
     
-    ### `creds.js` configuration
+    ### `config.js` configuration
     
     This file contains the data the scraper needs in order to properly connect and authenticate, and it’s fairly self-explanatory. **This file contains sensitive data. Do not check it into source control.** 
     

@@ -1,14 +1,14 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { checkQUBStatus, generateValidQUBEmail } = require("./QUBUtils");
 const googleCredentials = require("../google-credentials.json");
-const creds = require("../creds");
+const config = require("../config");
 require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 const googleSheets = async (fixrData) => {
   console.log(`[GS] Processing ${fixrData.length} entries`);
 
   console.log(`[GS] Authenticating...`);
-  const doc = new GoogleSpreadsheet(creds.sheetId);
+  const doc = new GoogleSpreadsheet(config.sheetId);
   await doc.useServiceAccountAuth(googleCredentials);
   await doc.loadInfo();
   let sheet = undefined;
