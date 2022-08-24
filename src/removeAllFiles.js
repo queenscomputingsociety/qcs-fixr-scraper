@@ -8,7 +8,7 @@ const removeAllFilesInDirectory = async (dir) => {
   console.log(`[RAFD] Removing all files in directory "${creds.downloadDir}"`);
 
   fs.mkdir(creds.downloadDir, (err) => {
-    if (err.code == "EEXIST") return;
+    return;
   });
   fs.readdir(dir, (err, files) => {
     if (err) {

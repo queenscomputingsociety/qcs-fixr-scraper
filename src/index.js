@@ -10,6 +10,7 @@ process.on("SIGINT", function () {
 schedule.scheduleJob(`0 */${creds.runEvery} * * *`, () => {
   console.log("Starting run at " + new Date());
   main();
+  console.log("Run complete")
 });
 
 //Run it once on startup

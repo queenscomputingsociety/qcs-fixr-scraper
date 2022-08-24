@@ -10,8 +10,9 @@ const main = async () => {
     "Queen's Computing Society, Queen's University Belfast\n 2022 - James McFarland."
   );
   await removeAllFilesInDirectory(creds.downloadDir);
-  await scrape(true);
-  await processData();
+  await scrape(false);
+  // await processData();
+  return
 };
 
 module.exports = { main };
