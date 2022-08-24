@@ -2,3 +2,4 @@ node_modules/
 yarn.lock
 creds.js
 download/
+creds.js
