@@ -1,6 +1,6 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const googleCredentials = require("../../google-credentials.json");
-const config = require("../../config");
+const googleCredentials = require("../google-credentials.json");
+const config = require("../config");
 require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 const sheetsv2 = async () => {

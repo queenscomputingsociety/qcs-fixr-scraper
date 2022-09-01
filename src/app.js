@@ -2,9 +2,9 @@ const showBanner = require("node-banner");
 const config = require("../config");
 const { removeAllFilesInDirectory } = require("./removeAllFiles");
 const { scrape } = require("./scrape");
-const { hook } = require("./v2/hook");
-const { sheetsv2 } = require("./v2/sheets2");
-const { uploadData } = require("./v2/uploadData");
+const { hook } = require("./hook");
+const { sheetsv2 } = require("./sheets2");
+const { uploadData } = require("./uploadData");
 
 const main = async () => {
   await showBanner(

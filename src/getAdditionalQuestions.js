@@ -3,7 +3,7 @@ const fse = require("fs-extra")
 const puppeteer = require("puppeteer");
 const path = require("path")
 const { sheetsv2 } = require("./sheets2");
-const config = require("../../config")
+const config = require("../config")
 
 const getAdditionalQuestions = async () => {
 
