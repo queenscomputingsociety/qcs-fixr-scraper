@@ -1,5 +1,4 @@
 # QCS FIXR Scraper
-[![CodeFactor](https://www.codefactor.io/repository/github/queenscomputingsociety/qcs-fixr-scraper/badge)](https://www.codefactor.io/repository/github/queenscomputingsociety/qcs-fixr-scraper)
 # Before starting
 
 I’d recommend at least a basic understanding of JavaScript and Node.JS
