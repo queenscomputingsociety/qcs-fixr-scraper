@@ -17,18 +17,24 @@ const googleSheets = async (fixrData) => {
     console.log(`[GS] Attemping to create sheet...`);
     sheet = await doc.addSheet({
       headerValues: [
-        "Club/Soc",
-        "First name",
-        "Last name",
-        "SN",
-        "QUBSE",
-        "IFNSEM",
+        
+        "reference",
+        "timestamp",
+        "first_name",
+        "last_name",
+        "fixr_email",
+        "date_of_birth",
+        "full name (as registered with qub)",
+        "year group",
+        "university email address (yourname@qub.ac.uk)",
+        "discord username (if you have one)",
+        "minecraft ign (again, if you have one, and only for the java version of the game)",
       ],
-      title: "DEV - Full list (for su)",
+      title: "Raw data (do not edit)",
     });
   } catch {
     console.log(`[GS] Sheet exists... Using that instead`);
-    sheet = await doc.sheetsByTitle["DEV - Full list (for su)"];
+    sheet = await doc.sheetsByTitle["Raw data (do not edit)"];
   }
 
   console.log(`[GS] Transforming FIXR data`);
