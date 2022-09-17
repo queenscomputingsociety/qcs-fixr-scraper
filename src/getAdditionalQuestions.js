@@ -135,8 +135,18 @@ const getQuestions = async () => {
     );
     console.log("[AQ Questions] Done getting questions");
     console.log("[AQ Questions] Parsing JSON");
+
+    let check = 0;
     while(!fs.existsSync(`${config.downloadDir}/questions.json`)){
-        //Do nothing
+        await new Promise((resolve) => {
+            setTimeout(resolve, 100);
+          });
+        check+=1;
+        if(check > 100){
+            console.log("[AQ Questions] Took too long to open file")
+            break;
+        }
+          
     }
     let json = JSON.parse(fs.readFileSync(`${config.downloadDir}/questions.json`))
     console.log("[AQ Questions] Returning...");
