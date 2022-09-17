@@ -30,9 +30,10 @@ const scrape = async (headlessMode) => {
       let filePath = path.resolve(`./${config.downloadDir}/output.json`);
       await fse.outputFile(filePath, await response.buffer());
       await browser.close();
-
+      
     }
     catch {
+      await browser.close();
       await scrape(headlessMode)
     }
   });
