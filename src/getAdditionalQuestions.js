@@ -75,7 +75,7 @@ const fetchData = async refsToGet => {
     for (let i = 0; i < refsToGet.length; i++) {
 
         page.on('response', async (response) => {
-            if (response.request().method !== 'GET') {
+            if (response.request().method() !== 'GET') {
                 return
               }
             if (responded.includes(refsToGet[i])) {
@@ -134,8 +134,8 @@ const getQuestions = async () => {
 
 
     page.on('response', async (response) => {
-        console.log(response.request().method)
-        if (response.request().method !== 'GET') {
+        console.log(response.request().method())
+        if (response.request().method() !== 'GET') {
             return
           }
 

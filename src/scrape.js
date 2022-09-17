@@ -25,8 +25,7 @@ const scrape = async (headlessMode) => {
 
 
   page.on('response', async (response) => {
-    console.log(response.request().method())
-    if (response.request().method !== 'GET') {
+    if (response.request().method() !== 'GET') {
       return
     }
 
