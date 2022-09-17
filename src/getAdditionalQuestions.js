@@ -103,6 +103,7 @@ const fetchData = async refsToGet => {
 
     let check = 0;
     while(responded.length !== refsToGet.length){
+        console.log("WAITING")
         await new Promise((resolve) => {
             setTimeout(resolve, 100);
           });
