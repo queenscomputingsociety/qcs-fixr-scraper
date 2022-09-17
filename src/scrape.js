@@ -6,6 +6,8 @@ const fse = require("fs-extra")
 require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 const scrape = async (headlessMode) => {
+
+
   console.log("[SCRP] Starting browser");
 
   const browser = await puppeteer.launch({ headless: headlessMode });
@@ -23,10 +25,16 @@ const scrape = async (headlessMode) => {
 
 
   page.on('response', async (response) => {
+    try {
 
-    let filePath = path.resolve(`./${config.downloadDir}/output.json`);
-    await fse.outputFile(filePath, await response.buffer());
-    await browser.close();
+      let filePath = path.resolve(`./${config.downloadDir}/output.json`);
+      await fse.outputFile(filePath, await response.buffer());
+      await browser.close();
+
+    }
+    catch {
+      await scrape(headlessMode)
+    }
   });
   console.log("[SCRP] Downloading file");
   await page.goto(
@@ -35,6 +43,7 @@ const scrape = async (headlessMode) => {
   console.log("[SCRP] Done");
   console.log("[SCRP] Returning...");
   return
+
 };
 
 module.exports = {
