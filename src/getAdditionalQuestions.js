@@ -135,6 +135,9 @@ const getQuestions = async () => {
     );
     console.log("[AQ Questions] Done getting questions");
     console.log("[AQ Questions] Parsing JSON");
+    while(!fs.existsSync(`${config.downloadDir}/questions.json`)){
+        //Do nothing
+    }
     let json = JSON.parse(fs.readFileSync(`${config.downloadDir}/questions.json`))
     console.log("[AQ Questions] Returning...");
     return json.data.map(e => { return { id: e.id, question: e.question_text.toLowerCase() } });
