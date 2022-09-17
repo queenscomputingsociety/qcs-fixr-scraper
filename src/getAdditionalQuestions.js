@@ -75,6 +75,9 @@ const fetchData = async refsToGet => {
     for (let i = 0; i < refsToGet.length; i++) {
 
         page.on('response', async (response) => {
+            if (response.request().method !== 'GET') {
+                return
+              }
             if (responded.includes(refsToGet[i])) {
                 console.log("Duplicate resp detected... Skipping")
                 return
@@ -131,6 +134,9 @@ const getQuestions = async () => {
 
 
     page.on('response', async (response) => {
+        if (response.request().method !== 'GET') {
+            return
+          }
 
         let filePath = path.resolve(`./${config.downloadDir}/questions.json`);
         await fse.outputFile(filePath, await response.buffer());

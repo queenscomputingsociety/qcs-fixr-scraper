@@ -25,17 +25,19 @@ const scrape = async (headlessMode) => {
 
 
   page.on('response', async (response) => {
-    try {
 
-      let filePath = path.resolve(`./${config.downloadDir}/output.json`);
-      await fse.outputFile(filePath, await response.buffer());
-      await browser.close();
-      
+    if (response.request().method !== 'GET') {
+      return
     }
-    catch {
-      await browser.close();
-      await scrape(headlessMode)
-    }
+
+    let filePath = path.resolve(`./${config.downloadDir}/output.json`);
+    await fse.outputFile(filePath, await response.buffer());
+    await browser.close();
+
+
+
+
+
   });
   console.log("[SCRP] Downloading file");
   await page.goto(
