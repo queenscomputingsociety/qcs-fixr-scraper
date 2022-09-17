@@ -134,6 +134,7 @@ const getQuestions = async () => {
 
 
     page.on('response', async (response) => {
+        console.log(response.request().method)
         if (response.request().method !== 'GET') {
             return
           }
