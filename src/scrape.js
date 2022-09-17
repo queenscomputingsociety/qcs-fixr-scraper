@@ -26,13 +26,13 @@ const scrape = async (headlessMode) => {
 
     let filePath = path.resolve(`./${config.downloadDir}/output.json`);
     await fse.outputFile(filePath, await response.buffer());
+    await browser.close();
   });
   console.log("[SCRP] Downloading file");
   await page.goto(
     `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/attendees?limit=${config.maxAttendees}`
   );
   console.log("[SCRP] Done");
-  await browser.close();
   console.log("[SCRP] Returning...");
   return
 };
