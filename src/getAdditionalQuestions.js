@@ -96,9 +96,9 @@ const fetchData = async refsToGet => {
         await page.goto(
             `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/additional-answers?reference_id=${refsToGet[i]}`
         );
-        
+
     }
-    
+
     console.log("[AQ Answers] Got all supporting data, closing browser");
     await browser.close();
     console.log("[AQ Answers] Returning...");
@@ -137,18 +137,26 @@ const getQuestions = async () => {
     console.log("[AQ Questions] Parsing JSON");
 
     let check = 0;
-    while(!fs.existsSync(`${config.downloadDir}/questions.json`)){
+    let json = "";
+    while (true) {
         await new Promise((resolve) => {
             setTimeout(resolve, 100);
-          });
-        check+=1;
-        if(check > 100){
+        });
+        check += 1;
+        if (check > 100) {
             console.log("[AQ Questions] Took too long to open file")
             break;
         }
-          
+        try {
+
+            json = JSON.parse(fs.readFileSync(`${config.downloadDir}/questions.json`))
+            break;
+        }
+        catch {
+            continue;
+        }
+
     }
-    let json = JSON.parse(fs.readFileSync(`${config.downloadDir}/questions.json`))
     console.log("[AQ Questions] Returning...");
     return json.data.map(e => { return { id: e.id, question: e.question_text.toLowerCase() } });
 }
