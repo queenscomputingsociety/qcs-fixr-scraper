@@ -96,9 +96,9 @@ const fetchData = async refsToGet => {
         await page.goto(
             `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/additional-answers?reference_id=${refsToGet[i]}`
         );
-
+        
     }
-
+    
     console.log("[AQ Answers] Got all supporting data, closing browser");
     await browser.close();
     console.log("[AQ Answers] Returning...");
@@ -127,13 +127,13 @@ const getQuestions = async () => {
 
         let filePath = path.resolve(`./${config.downloadDir}/questions.json`);
         await fse.outputFile(filePath, await response.buffer());
+        await browser.close();
     });
     console.log("[AQ Questions] Getting questions...");
     await page.goto(
         `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/additional-questions`
     );
     console.log("[AQ Questions] Done getting questions");
-    await browser.close();
     console.log("[AQ Questions] Parsing JSON");
     let json = JSON.parse(fs.readFileSync(`${config.downloadDir}/questions.json`))
     console.log("[AQ Questions] Returning...");
