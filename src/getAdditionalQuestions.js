@@ -52,13 +52,6 @@ const getAdditionalQuestions = async () => {
 
     return { users: attendeesToGet, answers: answeredQuestions }
 
-
-
-
-
-
-
-
 }
 
 const fetchData = async refsToGet => {
@@ -78,16 +71,24 @@ const fetchData = async refsToGet => {
     await page.waitForNetworkIdle();
 
     let data = []
+    let responded = []
     for (let i = 0; i < refsToGet.length; i++) {
 
         page.on('response', async (response) => {
-            try {
-
-                const json = await JSON.parse(await response.buffer())
-                data.push(json.data)
-            } catch {
-                console.log(`[AQ Answers] Error - Invalid reference given ${refsToGet[i]}`)
-                data.push([])
+            if (responded.includes(refsToGet[i])) {
+                console.log("Duplicate resp detected... Skipping")
+                return
+            }
+            else {
+                responded.push(refsToGet[i])
+                try {
+                    const json = await JSON.parse(await response.buffer())
+                    data.push(json.data)
+                } catch (e) {
+                    console.log(e);
+                    console.log(`[AQ Answers] Error - Invalid reference given ${refsToGet[i]}`)
+                    data.push([])
+                }
             }
 
         });
@@ -95,7 +96,7 @@ const fetchData = async refsToGet => {
         await page.goto(
             `https://api.fixr.co/api/v2/organiser/accounts/${config.accountId}/events/${config.eventId}/additional-answers?reference_id=${refsToGet[i]}`
         );
-      
+
     }
 
     console.log("[AQ Answers] Got all supporting data, closing browser");
