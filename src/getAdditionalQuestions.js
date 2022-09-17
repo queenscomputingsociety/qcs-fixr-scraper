@@ -101,18 +101,11 @@ const fetchData = async refsToGet => {
 
     console.log("[AQ Answers] Got all supporting data, closing browser");
 
-    let check = 0;
-    while(responded.length !== refsToGet.length){
-        console.log("WAITING")
-        await new Promise((resolve) => {
-            setTimeout(resolve, 100);
-          });
-          check += 1;
-          if (check > 100) {
-              console.log("[AQ Answers] Took too long!")
-              break;
-          }
-    }
+
+
+    await new Promise((resolve) => {
+        setTimeout(resolve, 5000);
+    });
 
     await browser.close()
     console.log("[AQ Answers] Returning...");
