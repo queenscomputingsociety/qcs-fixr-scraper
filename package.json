@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "console-stamp": "^3.0.6",
     "csv-parse": "^5.0.4",
