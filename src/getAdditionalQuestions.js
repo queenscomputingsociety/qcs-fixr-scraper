@@ -34,7 +34,9 @@ const getAdditionalQuestions = async () => {
 
         if (attendeeData[i].length === 0) {
             console.log(`[AQ] Error - No data available (${attendee.reference_id}) `)
-            continue;
+            answeredQuestions.push({
+                reference: attendee.reference_id, answers: []
+            })
         }
 
         answeredQuestions.push({
