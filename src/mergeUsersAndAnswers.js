@@ -5,7 +5,7 @@ const mergeUsersAndAnswers = (users, answers) => {
     if (users.length !== answers.length) {
 
         console.log(`[MAU] WARN - Length mismatch (Users:${users.length}, Answers: ${answers.length}`)
-        return []
+        // return []
     }
 
 
